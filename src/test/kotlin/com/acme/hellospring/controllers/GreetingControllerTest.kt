@@ -15,18 +15,27 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 @AutoConfigureMockMvc
 class GreetingControllerTest {
         @Autowired
-        private var mockMvc: MockMvc? = null;
-
+        lateinit var mockMvc: MockMvc;
 
         @Test
         fun greetingShouldReturnDefaultMessage() {
-                this.mockMvc?.perform(get("/v1/hello/world"))?.andExpect(status().isOk())
-                        ?.andExpect(content().string(containsString("hello world")));
+                this.mockMvc.perform(
+                    get("/v1/hello/world")
+                ).andExpect(
+                    status().isOk()
+                ).andExpect(
+                    content().string(containsString("hello world"))
+                );
         }
 
         @Test
         fun greetingShouldReturnSpecificMessage() {
-                this.mockMvc?.perform(get("/v1/hello/world").param("name", "Trinh"))?.andExpect(status().isOk())
-                        ?.andExpect(content().string(containsString("hello Trinh")));
+                this.mockMvc.perform(
+                    get("/v1/hello/world").param("name", "Trinh")
+                ).andExpect(
+                    status().isOk()
+                ).andExpect(
+                    content().string(containsString("hello Trinh"))
+                );
         }
 }
