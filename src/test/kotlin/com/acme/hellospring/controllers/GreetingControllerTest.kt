@@ -17,6 +17,11 @@ class GreetingControllerTest {
         @Autowired
         lateinit var mockMvc: MockMvc;
 
+        val nullMockMvc: MockMvc? = null;
+
+        @Autowired
+        val notNullMockMvc: MockMvc? = null;
+
         @Test
         fun greetingShouldReturnDefaultMessage() {
                 this.mockMvc.perform(
@@ -38,4 +43,26 @@ class GreetingControllerTest {
                     content().string(containsString("hello Trinh"))
                 );
         }
+
+    @Test
+    fun `this test should not pass but unfortunately it does`() {
+        this.nullMockMvc?.perform(
+            get("/v1/hello/world").param("name", "LAZZA")
+        )?.andExpect(
+            status().isAccepted()
+        )?.andExpect(
+            content().string(containsString("THIS TEST WILL PASS FOR THE WRONG REASONS"))
+        )
+    }
+
+    @Test
+    fun `this test will fail as you expect`() {
+        this.notNullMockMvc?.perform(
+            get("/v1/hello/world").param("name", "LAZZA")
+        )?.andExpect(
+            status().isAccepted()
+        )?.andExpect(
+            content().string(containsString("THIS TEST WILL NOT PASS"))
+        )
+    }
 }
