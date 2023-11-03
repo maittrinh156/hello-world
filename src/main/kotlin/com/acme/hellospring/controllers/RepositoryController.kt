@@ -19,10 +19,8 @@ class RepositoryController {
             @PathVariable("repository") repository: String
     ) : ResponseEntity<Repository>? {
         val url: String = "https://api.github.com/repos/$owner/$repository"
-//        val authToken = "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"
         var headers: HttpHeaders = HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-//        headers.setBearerAuth(authToken)
         return try {
             val result = restTemplate.exchange(url, HttpMethod.GET, (HttpEntity<Any>(headers)), RepositoryResponse::class.java)
             ResponseEntity.ok(RepositoryMapper.toRepository(result.body))
