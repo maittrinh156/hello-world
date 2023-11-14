@@ -1,0 +1,10 @@
+#query retrieveRepositories ($numberOfPullRequests: Int, $owner: String, $name: String) {
+#    repository($owner, $name) {
+#        pullRequests(first: $numberOfPullRequests, states:MERGED) {
+#            nodes {
+#                createdAt
+#                mergedAt
+#            }
+#        }
+#    }
+#}

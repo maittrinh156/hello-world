@@ -6,6 +6,7 @@ plugins {
 	id 'org.jetbrains.kotlin.jvm' version '1.8.22'
 	id 'org.jetbrains.kotlin.plugin.spring' version '1.8.22'
 	id 'org.jetbrains.kotlin.plugin.jpa' version '1.8.22'
+	id 'com.apollographql.apollo3' version '3.8.2'
 }
 
 group = 'com.acme'
@@ -24,9 +25,19 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
 	implementation 'org.jetbrains.kotlin:kotlin-reflect'
+	implementation "org.jetbrains.kotlin:kotlin-stdlib"
+	implementation("com.apollographql.apollo3:apollo-runtime:3.8.2")
+
+
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation "org.junit.jupiter:junit-jupiter:5.10.0"}
+
+apollo {
+	service("service") {
+		packageName.set("com.acme")
+	}
+}
 
 tasks.withType(KotlinCompile) {
 	kotlinOptions {

@@ -3,6 +3,11 @@ package com.acme.hellospring.controllers
 import com.acme.hellospring.models.Repository
 import com.acme.hellospring.models.mappers.RepositoryMapper
 import com.acme.hellospring.models.reponses.RepositoryResponse
+import com.apollographql.apollo3.ApolloClient
+import com.apollographql.apollo3.network.okHttpClient
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.springframework.http.*
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -28,5 +33,11 @@ class RepositoryController {
             ResponseEntity(HttpStatus.NOT_FOUND)
         }
 
+    }
+    @GetMapping("/v1/repository/{owner}/{repository}/pull_requests")
+    fun getPullRequestMeanTime(
+        @PathVariable("owner") owner: String,
+        @PathVariable("repository") repository: String
+    ) {
     }
 }
